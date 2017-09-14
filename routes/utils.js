@@ -1050,7 +1050,7 @@ utils.createAuthServer = function (app, serverName) {
             api: {
                 name: serverName,
                 upstream_url: 'http://auth-server:3005',
-                uris: '/auth-server',
+                uris: ['/auth-server'],
                 preserve_host: false,
                 strip_uri: false,
             },
