@@ -1,0 +1,33 @@
+extends layout
+
+block scripts
+    //link(rel="stylesheet", href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/styles/default.min.css")
+    //script(src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js")
+
+block content
+    .jumbotron
+        .container
+            h1 APIs.json File - #{apiId}
+            
+            p.
+                You <i>could</i> edit the APIs.json file here, but to be honest, you won't. Copy and paste
+                it from someplace else. We'll check that it's valid JSON (but not more).
+    
+    .container
+        p.
+            If you are wondering what APIs.json is about, just head over to <a href="http://apisjson.org">{A}APIs.json</a> or directly look at <a href="http://apisjson.org/format.html">APIS.JSON FORMAT DEFINITIONS</a>.
+    
+        p.
+            If you have trouble in writing valid JSON, try <a href='http://www.jsonlint.org' target='_blank'>JSONlint</a>
+            or something similar. A good friend is always <a href='http://apis.io/builder' target='_blank'>API.json builder</a>.
+            It will do more for you, like visualizing things and making sure it's valid APIs.json. You can copy this file
+            from here and paste it there.
+        p.
+            In case your backend service has its own end point serving the APIs.json, you can point wicked to this location
+            by inserting the following JSON into this file: <code>{"href":"http://your.backend/api-docs"}</code>. The <code>href</code>
+            may contain environment variables; add here, save, and then edit in the <a href="/envs">Environments section</a>.
+        
+        form(role='form' action='/apisjson/#{apiId}' method='post')
+            +renderButtons('/apisjson/' + apiId, '/apis', null, '&laquo; Save &amp; Return')
+            br
+            textarea(name='swagger' style='height:500px;').form-control= swagger

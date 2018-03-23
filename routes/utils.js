@@ -45,13 +45,13 @@ function applyProperty(to, propName, value) {
                 current = current[thisProp][index];
             } else {
                 //current[thisProp][index] = value;
-                var str_array = value.split(','); 
-                if(str_array.length>1){
-                  for(var i = 0; i < str_array.length; i++) {
-                     current[thisProp][index++] = str_array[i];
-                  }
+                var str_array = value.split(',');
+                if (str_array.length > 1) {
+                    for (var i = 0; i < str_array.length; i++) {
+                        current[thisProp][index++] = str_array[i];
+                    }
                 } else {
-                  current[thisProp][index] = value;
+                    current[thisProp][index] = value;
                 }
             }
         } else {
@@ -509,9 +509,9 @@ utils.loadApis = function (app) {
                 mandatory_scope: false
             };
         }
-//        if (!thisApi.authServers && authServers.length > 0) {
-//            thisApi.authServer = authServers[0];
-//        }
+        //        if (!thisApi.authServers && authServers.length > 0) {
+        //            thisApi.authServer = authServers[0];
+        //        }
     }
     return apis;
 };
@@ -601,19 +601,35 @@ utils.removeApiDir = function (app, apiId) {
     fs.rmdirSync(apiDir);
 };
 
-function getSwaggerFileName(app, apiId) {
+function getFileNameFromApi(app, apiId, fileName) {
     var apiDir = getApiDir(app, apiId);
-    var swaggerFileName = path.join(apiDir, 'swagger.json');
+    var swaggerFileName = path.join(apiDir, fileName);
     return swaggerFileName;
 }
 
 utils.loadSwagger = function (app, apiId) {
     console.log('apiId: ' + apiId);
-    return JSON.parse(fs.readFileSync(getSwaggerFileName(app, apiId), 'utf8'));
+    return JSON.parse(fs.readFileSync(getFileNameFromApi(app, apiId, 'swagger.json'), 'utf8'));
 };
 
 utils.saveSwagger = function (app, apiId, swagger) {
-    fs.writeFileSync(getSwaggerFileName(app, apiId), JSON.stringify(swagger, null, 2), 'utf8');
+    fs.writeFileSync(getFileNameFromApi(app, apiId, 'swagger.json'), JSON.stringify(swagger, null, 2), 'utf8');
+};
+
+utils.loadApisJson = function (app, apiId) {
+    console.log('apiId: ' + apiId);
+    try {
+        return JSON.parse(fs.readFileSync(getFileNameFromApi(app, apiId, 'apis.json'), 'utf8'));
+    } catch (err) {
+        if (err.code !== 'ENOENT') {
+            throw err;
+        }
+        return {};
+    }
+};
+
+utils.saveApisJson = function (app, apiId, swagger) {
+    fs.writeFileSync(getFileNameFromApi(app, apiId, 'apis.json'), JSON.stringify(swagger, null, 2), 'utf8');
 };
 
 utils.loadApiDesc = function (app, apiId) {

@@ -92,6 +92,7 @@ mixin renderApi(api, i)
                                                 | #{plan.id} - #{plan.name}
                         a(href='/apidesc/#{api.id}').btn.btn-info.btn-block API Long Description
                         a(href='/swagger/#{api.id}').btn.btn-info.btn-block Swagger File
+                        a(href='/apisjson/#{api.id}').btn.btn-info.btn-block APIs.json File
                         a(href='/apis/#{api.id}').btn.btn-info.btn-block Kong Configuration
         .col-md-2
             | &nbsp;

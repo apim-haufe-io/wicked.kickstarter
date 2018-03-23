@@ -29,6 +29,8 @@ var envs = require('./routes/envs');
 var ssl = require('./routes/ssl');
 var shutdown = require('./routes/shutdown');
 var authservers = require('./routes/authservers');
+var apisjson = require('./routes/apisjson');
+var apisIo = require('./routes/apisIo');
 
 // API functions
 var api = require('./routes/api');
@@ -73,6 +75,8 @@ app.use('/apidesc', apidesc);
 app.use('/editcontent', editcontent);
 app.use('/templates', templates);
 app.use('/envs', envs);
+app.use('/apisjson', apisjson);
+app.use('/apisIo', apisIo);
 app.use('/shutdown', shutdown);
 
 app.use('/api', api);
