@@ -63,6 +63,7 @@ Vue.component('wicked-api', {
             <select v-model="value.auth" class="form-control">
                 <option value="key-auth">Authorize with simple API Keys (key-auth)</option>
                 <option value="oauth2">Authorize using OAuth 2.0 (oauth2)</option>
+                <option value="none">Authorization not required</option>
             </select>
             <wicked-checkbox v-model="value.hide_credentials" label="<b>Hide Credentials</b> from upstream server"/>
         </div>
