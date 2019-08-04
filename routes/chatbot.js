@@ -7,8 +7,8 @@ const { debug, info, warn, error } = require('portal-env').Logger('kickstarter:c
 const utils = require('./utils');
 
 const chatbotTypes = [
-    "SLACK/ROCKETCHAT",
-    "MSTEAMS",
+    "slack",
+    "msteams",
 ];
 
 router.get('/', function (req, res, next) {
